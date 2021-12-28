@@ -11,7 +11,6 @@ const LyricsContextProvider = ({ children }) => {
   const [lyrics, setLyrics] = useState([]);
 
   useEffect(() => getTrack(commontrack_id), [commontrack_id]);
-
   useEffect(() => getLyrics(commontrack_id), [commontrack_id]);
 
   const getTrack = (commontrack_id) => {
@@ -31,6 +30,7 @@ const LyricsContextProvider = ({ children }) => {
       .then((data) => {
         const { body } = data.message;
         setDoneFetchLyrics(true);
+        console.log(!Array.isArray(body));
         !Array.isArray(body) && setLyrics(body.lyrics.lyrics_body);
       })
       .catch((err) => console.log(err));
